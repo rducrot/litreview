@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Home</h1>
+    <p>Vous êtes connecté !</p>
+    <p>Utilisateur {{ request.user }}</p>
+    <a href="{% url 'logout' %}">Se déconnecter</a>
+{% endblock content %}
