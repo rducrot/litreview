@@ -1,16 +1,25 @@
-<html>
+<!DOCTYPE html>
+<html lang="fr">
+{% load static %}
+
 <head>
     <title>LITReview</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 
 <body>
-    <header>
-        <nav>
+    <header class="header">
+        <h1 class="header__title">LITReview</h1>
+        <nav class="header__nav">
             {% if user.is_authenticated %}
+                <a href="{% url 'home' %}">Flux</a> |
+                <a>Posts</a> |
+                <a>Abonnements</a> |
                 <a href="{% url 'logout' %}">Se déconnecter</a>
             {% endif %}
         </nav>
     </header>
-    {% block content %}{% endblock content %}
+    <div class="content">{% block content %}{% endblock content %}</div>
 </body>
 </html>

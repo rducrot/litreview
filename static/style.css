@@ -1,0 +1,34 @@
+body{
+    margin: 0;
+}
+
+.header{
+    background: lightblue;
+    display: flex;
+    margin-bottom: 1em;
+    padding-right: 1em;
+    height: 5em;
+}
+.header__title{
+    position: absolute;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    align-self: center;
+    pointer-events: none;
+}
+.header__nav{
+    align-self: center;
+    margin-left: auto;
+}
+.header__nav a{
+    text-decoration: none;
+}
+.content{
+    width: 50%;
+    margin: auto;
+}
+.home-actions{
+    display: flex;
+    justify-content: space-around;
+}
