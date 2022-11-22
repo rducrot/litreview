@@ -28,6 +28,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('home/', review.views.home, name='home'),
     path('ticket/create/', review.views.ticket_create, name='ticket-create'),
+    path('review/create/', review.views.ticket_and_review_create, name='ticket-and-review-create')
 ]
 if settings.DEBUG:
     urlpatterns += static(

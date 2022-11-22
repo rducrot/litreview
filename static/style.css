@@ -32,3 +32,11 @@ body{
     display: flex;
     justify-content: space-around;
 }
+.ticket{
+    border: 1px solid;
+    margin: 10px 0;
+    padding: 0 10px;
+}
+.ticket img{
+    max-width: 200px;
+}
