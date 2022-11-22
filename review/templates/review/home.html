@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Home</h1>
-    <p>Vous êtes connecté !</p>
-    <p>Utilisateur {{ request.user }}</p>
-    <a href="{% url 'logout' %}">Se déconnecter</a>
-{% endblock content %}
+    <a href="{% url 'ticket-create' %}">Demander une critique</a>
+    <a>Créer une critique</a>
+    {% for ticket in tickets %}
+        <p>{{ ticket.title }}</p>
+    {% endfor %}
+{% endblock %}
