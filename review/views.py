@@ -1,3 +1,5 @@
+from itertools import chain
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
@@ -7,8 +9,14 @@ from . import forms, models
 @login_required
 def home(request):
     tickets = models.Ticket.objects.all()
+    reviews = models.Review.objects.all()
+    tickets_and_reviews = sorted(
+        chain(tickets, reviews),
+        key=lambda instance: instance.time_created,
+        reverse=True
+    )
     context = {
-        'tickets': tickets,
+        'tickets_and_reviews': tickets_and_reviews,
     }
     return render(request, 'review/home.html',
                   context)
