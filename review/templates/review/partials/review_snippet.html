@@ -8,5 +8,8 @@
         <p>{{ review.ticket.title }}</p>
         <p>{{ review.ticket.description }}</p>
         <img src="{{ review.ticket.image.url }}">
+        {% if review.ticket.user != user %}
+            <a href="{% url 'review-create' review.ticket.id %}">Créer une critique</a>
+        {% endif %}
     </div>
 </div>

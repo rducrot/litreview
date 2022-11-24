@@ -28,7 +28,8 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('home/', review.views.home, name='home'),
     path('ticket/create/', review.views.ticket_create, name='ticket-create'),
-    path('review/create/', review.views.ticket_and_review_create, name='ticket-and-review-create')
+    path('review/create/', review.views.ticket_and_review_create, name='ticket-and-review-create'),
+    path('ticket/<int:ticket_id>/review/create', review.views.review_create, name='review-create'),
 ]
 if settings.DEBUG:
     urlpatterns += static(

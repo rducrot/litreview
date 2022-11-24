@@ -60,3 +60,26 @@ def ticket_and_review_create(request):
     }
     return render(request, 'review/ticket_and_review_create.html',
                   context=context)
+
+
+@login_required
+def review_create(request, ticket_id):
+    ticket = models.Ticket.objects.get(id=ticket_id)
+    form = forms.ReviewForm()
+    hide_review_button = True
+
+    if request.method == 'POST':
+        form = forms.ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            review.ticket = ticket
+            review.save()
+            return redirect('home')
+    context = {
+        'ticket': ticket,
+        'form': form,
+        'hide_review_button': hide_review_button,
+    }
+    return render(request, 'review/review_create.html',
+                  context=context)
