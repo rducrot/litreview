@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load review_extras %}
+
+{% block content %}
+    <h2>Vos posts</h2>
+    {% for instance in tickets_and_reviews %}
+        {% if instance|model_type == 'Ticket' %}
+            {% include 'review/partials/ticket_snippet.html' with ticket=instance %}
+        {% endif %}
+        {% if instance|model_type == 'Review' %}
+            {% include 'review/partials/review_snippet.html' with review=instance %}
+        {% endif %}
+    {% endfor %}
+{% endblock %}

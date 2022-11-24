@@ -33,15 +33,17 @@ body{
     justify-content: space-around;
 }
 .ticket{
-    border: 1px solid;
+    border: 1px solid lightgrey;
     margin: 10px 0;
     padding: 0 10px;
+    border-radius: 3px;
 }
 .ticket img{
     max-width: 200px;
 }
 .review{
-    border: 1px solid;
+    border: 1px solid lightgrey;
     margin: 10px 0;
     padding: 0 10px;
+        border-radius: 3px;
 }

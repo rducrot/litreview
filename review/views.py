@@ -23,6 +23,22 @@ def home(request):
 
 
 @login_required
+def user_posts(request):
+    tickets = models.Ticket.objects.filter(user=request.user)
+    reviews = models.Review.objects.filter(user=request.user)
+    tickets_and_reviews = sorted(
+        chain(tickets, reviews),
+        key=lambda instance: instance.time_created,
+        reverse=True
+    )
+    context = {
+        'tickets_and_reviews': tickets_and_reviews,
+    }
+    return render(request, 'review/user_posts.html',
+                  context)
+
+
+@login_required
 def ticket_create(request):
     form = forms.TicketForm()
     if request.method == 'POST':

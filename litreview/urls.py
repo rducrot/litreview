@@ -29,6 +29,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('signup', authentication.views.signup, name='signup'),
     path('home/', review.views.home, name='home'),
+    path('posts/', review.views.user_posts, name='user-posts'),
     path('ticket/create/', review.views.ticket_create, name='ticket-create'),
     path('review/create/', review.views.ticket_and_review_create, name='ticket-and-review-create'),
     path('ticket/<int:ticket_id>/review/create', review.views.review_create, name='review-create'),
