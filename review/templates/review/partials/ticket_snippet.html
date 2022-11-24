@@ -7,4 +7,8 @@
     {% if not hide_review_button %}
         <a href="{% url 'review-create' ticket.id %}">Créer une critique</a>
     {% endif %}
+    {% if post_page %}
+        <a href="{% url 'ticket-update' ticket.id %}">Modifier</a>
+        <a>Supprimer</a>
+    {% endif %}
 </div>

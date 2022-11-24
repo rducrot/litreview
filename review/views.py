@@ -1,7 +1,7 @@
 from itertools import chain
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from . import forms, models
 
@@ -31,8 +31,10 @@ def user_posts(request):
         key=lambda instance: instance.time_created,
         reverse=True
     )
+    post_page = True
     context = {
         'tickets_and_reviews': tickets_and_reviews,
+        'post_page': post_page,
     }
     return render(request, 'review/user_posts.html',
                   context)
@@ -49,6 +51,19 @@ def ticket_create(request):
             ticket.save()
             return redirect('home')
     return render(request, 'review/ticket_create.html',
+                  context={'form': form})
+
+
+@login_required
+def ticket_update(request, ticket_id):
+    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    form = forms.TicketForm(instance=ticket)
+    if request.method == 'POST':
+        form = forms.TicketForm(request.POST, instance=ticket)
+        if form.is_valid():
+            form.save()
+            return redirect('user-posts')
+    return render(request, 'review/ticket_update.html',
                   context={'form': form})
 
 
@@ -99,3 +114,15 @@ def review_create(request, ticket_id):
     }
     return render(request, 'review/review_create.html',
                   context=context)
+
+
+def review_update(request, review_id):
+    review = get_object_or_404(models.Review, id=review_id)
+    form = forms.ReviewForm(instance=review)
+    if request.method == 'POST':
+        form = forms.ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            form.save()
+            return redirect('user-posts')
+    return render(request, 'review/review_update.html',
+                    context={'form': form})
