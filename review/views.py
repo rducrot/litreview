@@ -41,6 +41,34 @@ def user_posts(request):
 
 
 @login_required
+def following(request):
+    form = forms.UserFollowsForm()
+    followed_users = models.UserFollows.objects.filter(user=request.user)
+    following_users = models.UserFollows.objects.filter(followed_user=request.user)
+    if request.method == 'POST':
+        form = forms.UserFollowsForm(request.POST)
+        if form.is_valid():
+            user_follows = form.save(commit=False)
+            user_follows.user = request.user
+            user_follows.save()
+            return redirect('following')
+    context = {
+        'form': form,
+        'followed_users': followed_users,
+        'following_users': following_users,
+    }
+    return render(request, 'review/following.html',
+                  context=context)
+
+
+@login_required
+def unfollow(request, following_id):
+    user_follows = get_object_or_404(models.UserFollows, id=following_id)
+    user_follows.delete()
+    return redirect('following')
+
+
+@login_required
 def ticket_create(request):
     form = forms.TicketForm()
     if request.method == 'POST':
@@ -139,7 +167,7 @@ def review_update(request, review_id):
 
 @login_required
 def review_delete(request, review_id):
-    review = get_object_or_404(models.Review, id= review_id)
+    review = get_object_or_404(models.Review, id=review_id)
     # TODO: Confirmation message
     review.delete()
     return redirect('user-posts')
