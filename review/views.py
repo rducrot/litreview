@@ -1,6 +1,7 @@
 from itertools import chain
 
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 
 from . import forms, models
@@ -8,8 +9,13 @@ from . import forms, models
 
 @login_required
 def home(request):
-    tickets = models.Ticket.objects.all()
-    reviews = models.Review.objects.all()
+    user_follows = models.UserFollows.objects.filter(user=request.user).values('followed_user')
+    tickets = models.Ticket.objects.filter(
+        Q(user__in=user_follows) | Q(user=request.user)
+    )
+    reviews = models.Review.objects.filter(
+        Q(user__in=user_follows) | Q(user=request.user)
+    )
     tickets_and_reviews = sorted(
         chain(tickets, reviews),
         key=lambda instance: instance.time_created,
