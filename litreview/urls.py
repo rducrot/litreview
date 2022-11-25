@@ -32,9 +32,11 @@ urlpatterns = [
     path('posts/', review.views.user_posts, name='user-posts'),
     path('ticket/create/', review.views.ticket_create, name='ticket-create'),
     path('ticket/<int:ticket_id>/update', review.views.ticket_update, name='ticket-update'),
+    path('ticket/<int:ticket_id>/delete', review.views.ticket_delete, name='ticket-delete'),
     path('review/create/', review.views.ticket_and_review_create, name='ticket-and-review-create'),
     path('ticket/<int:ticket_id>/review/create', review.views.review_create, name='review-create'),
     path('review/<int:review_id>/update', review.views.review_update, name='review-update'),
+    path('review/<int:review_id>/delete', review.views.review_delete, name='review-delete'),
 ]
 if settings.DEBUG:
     urlpatterns += static(

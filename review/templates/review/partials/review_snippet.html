@@ -6,7 +6,7 @@
     <p>{{ review.body }}</p>
     {% if post_page %}
         <a href="{% url 'review-update' review.id %}">Modifier</a>
-        <a>Supprimer</a>
+        <a href="{% url 'review-delete' review.id %}">Supprimer</a>
     {% endif %}
     <div class="ticket">
         <p>Ticket - {{ review.ticket.user }}</p>

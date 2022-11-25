@@ -9,6 +9,6 @@
     {% endif %}
     {% if post_page %}
         <a href="{% url 'ticket-update' ticket.id %}">Modifier</a>
-        <a>Supprimer</a>
+        <a href="{% url 'ticket-delete' ticket.id %}">Supprimer</a>
     {% endif %}
 </div>

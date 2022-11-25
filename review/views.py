@@ -68,6 +68,14 @@ def ticket_update(request, ticket_id):
 
 
 @login_required
+def ticket_delete(request, ticket_id):
+    ticket = get_object_or_404(models.Ticket, id=ticket_id)
+    # TODO: Confirmation message
+    ticket.delete()
+    return redirect('user-posts')
+
+
+@login_required
 def ticket_and_review_create(request):
     ticket_form = forms.TicketForm()
     review_form = forms.ReviewForm()
@@ -116,6 +124,7 @@ def review_create(request, ticket_id):
                   context=context)
 
 
+@login_required
 def review_update(request, review_id):
     review = get_object_or_404(models.Review, id=review_id)
     form = forms.ReviewForm(instance=review)
@@ -125,4 +134,12 @@ def review_update(request, review_id):
             form.save()
             return redirect('user-posts')
     return render(request, 'review/review_update.html',
-                    context={'form': form})
+                  context={'form': form})
+
+
+@login_required
+def review_delete(request, review_id):
+    review = get_object_or_404(models.Review, id= review_id)
+    # TODO: Confirmation message
+    review.delete()
+    return redirect('user-posts')
