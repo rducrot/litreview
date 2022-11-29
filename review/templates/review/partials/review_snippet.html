@@ -1,8 +1,9 @@
+{% load review_extras %}
+
 <div class="review">
     <p>{{ review.user }} a publié une critique.</p>
     <p>{{ review.time_created }}</p>
-    <p>{{ review.headline }}</p>
-    <p>{{ review.rating }} étoiles</p>
+    <h3>{{ review.headline }} - {{ review.rating|show_rating }}</h3>
     <p>{{ review.body }}</p>
     {% if post_page %}
         <a href="{% url 'review-update' review.id %}">Modifier</a>
