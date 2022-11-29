@@ -3,8 +3,8 @@
 
 {% block content %}
     <div class="home-actions">
-        <a href="{% url 'ticket-create' %}">Demander une critique</a>
-        <a href="{% url 'ticket-and-review-create' %}">Créer une critique</a>
+        <a href="{% url 'ticket-create' %}" class="btn btn-primary">Demander une critique</a>
+        <a href="{% url 'ticket-and-review-create' %}" class="btn btn-primary">Créer une critique</a>
     </div>
     {% for instance in tickets_and_reviews %}
         {% if instance|model_type == 'Ticket' %}

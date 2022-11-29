@@ -6,15 +6,15 @@
     <h3>{{ review.headline }} - {{ review.rating|show_rating }}</h3>
     <p>{{ review.body }}</p>
     {% if post_page %}
-        <a href="{% url 'review-update' review.id %}">Modifier</a>
-        <a href="{% url 'review-delete' review.id %}">Supprimer</a>
+        <a href="{% url 'review-update' review.id %}" class="btn btn-primary">Modifier</a>
+        <a href="{% url 'review-delete' review.id %}" class="btn btn-danger">Supprimer</a>
     {% endif %}
     <div class="ticket">
         <p>Ticket - {{ review.ticket.user }}</p>
         <p>{{ review.ticket.title }}</p>
         <img src="{{ review.ticket.image.url }}">
         {% if review.ticket.user != user %}
-            <a href="{% url 'review-create' review.ticket.id %}">Créer une critique</a>
+            <a href="{% url 'review-create' review.ticket.id %}" class="btn btn-primary">Créer une critique</a>
         {% endif %}
     </div>
 </div>

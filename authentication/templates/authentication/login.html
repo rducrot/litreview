@@ -4,14 +4,14 @@
 <div style="display:flex">
     <div style="margin: 1em">
         <h2>Inscrivez-vous maintenant</h2>
-        <a href="{% url 'signup' %}">S'inscrire</a>
+        <a href="{% url 'signup' %}" class="btn btn-secondary">S'inscrire</a>
     </div>
     <div>
         <h2 style="margin: 1em">Connectez-vous</h2>
         <form method="post">
             {{ form.as_p }}
             {% csrf_token %}
-            <button type="submit">Se connecter</button>
+            <button type="submit" class="btn btn-primary">Se connecter</button>
         </form>
     </div>
 </div>

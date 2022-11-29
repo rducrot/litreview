@@ -5,12 +5,12 @@
     <form method="post" enctype="multipart/form-data">
         {{ form.as_p }}
         {% csrf_token %}
-        <button type="submit">Envoyer</button>
+        <button type="submit" class="btn btn-primary">Envoyer</button>
     </form>
     <h2>Abonnements</h2>
     {% for user_follows in followed_users %}
         <p>{{ user_follows.followed_user.username }}</p>
-        <a href="{% url 'unfollow' user_follows.id %}">Supprimer</a>
+        <a href="{% url 'unfollow' user_follows.id %}" class="btn btn-danger">Supprimer</a>
     {% endfor %}
     <h2>Abonnés</h2>
     {% for user_follows in following_users %}
