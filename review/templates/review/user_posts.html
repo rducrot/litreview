@@ -2,7 +2,7 @@
 {% load review_extras %}
 
 {% block content %}
-    <h2>Vos posts</h2>
+    <h2 class="text-center m-4">Vos posts</h2>
     {% for instance in tickets_and_reviews %}
         {% if instance|model_type == 'Ticket' %}
             {% include 'review/partials/ticket_snippet.html' with ticket=instance %}

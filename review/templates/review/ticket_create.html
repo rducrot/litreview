@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Créer un ticket</h2>
+<h2 class="text-center m-4">Créer un ticket</h2>
 <form method="post" enctype="multipart/form-data">
     {% include 'review/partials/ticket_form_snippet.html' %}
     {% csrf_token %}

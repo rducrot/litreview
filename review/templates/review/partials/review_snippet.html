@@ -1,19 +1,24 @@
 {% load review_extras %}
 
-<div class="review">
-    <p>{{ review.user }} a publié une critique.</p>
-    <p>{{ review.time_created }}</p>
+<div class="card m-2">
+    <div class="card-header bg-primary text-white d-flex justify-content-between">
+        <span class="card-title">{{ review.user }} a publié une critique.</span>
+        <small>{{ review.time_created }}</small>
+    </div>
+    <div class="card-body">
     <h3>{{ review.headline }} - {{ review.rating|show_rating }}</h3>
     <p>{{ review.body }}</p>
-    <div class="ticket">
-        <p>Ticket - {{ review.ticket.user }}</p>
+    <div class="card">
+        <p class="card-header">Ticket - {{ review.ticket.user }}</p>
+        <div class="card-body">
         <p>{{ review.ticket.title }}</p>
-        <img src="{{ review.ticket.image.url }}">
+        <img src="{{ review.ticket.image.url }}" style="max-width: 200px;">
         {% if review.ticket.user != user %}
             <div class="d-flex p-2 justify-content-end">
                 <a href="{% url 'review-create' review.ticket.id %}" class="btn btn-primary">Créer une critique</a>
             </div>
         {% endif %}
+        </div>
     </div>
     {% if post_page %}
         <div class="d-flex p-2 justify-content-end">
@@ -21,4 +26,5 @@
             <a href="{% url 'review-delete' review.id %}" class="btn btn-danger m-2">Supprimer</a>
         </div>
     {% endif %}
+    </div>
 </div>

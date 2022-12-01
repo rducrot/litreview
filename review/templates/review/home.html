@@ -2,7 +2,7 @@
 {% load review_extras %}
 
 {% block content %}
-    <div class="home-actions">
+    <div class="d-flex justify-content-around m-4">
         <a href="{% url 'ticket-create' %}" class="btn btn-primary">Demander une critique</a>
         <a href="{% url 'ticket-and-review-create' %}" class="btn btn-primary">Créer une critique</a>
     </div>

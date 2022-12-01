@@ -1,9 +1,12 @@
-<div class="ticket">
-    <p>{{ ticket.user }} a demandé une critique.</p>
-    <p>{{ ticket.time_created }}</p>
-    <p>{{ ticket.title }}</p>
+<div class="card m-2">
+    <div class="card-header bg-primary text-white d-flex justify-content-between">
+        <span class="card-title">{{ ticket.user }} a demandé une critique.</span>
+        <small>{{ ticket.time_created }}</small>
+    </div>
+    <div class="card-body">
+    <h3>{{ ticket.title }}</h3>
     <p>{{ ticket.description }}</p>
-    <img src="{{ ticket.image.url }}">
+    <img src="{{ ticket.image.url }}" style="max-width: 200px;">
     {% if not hide_review_button %}
         <div class="d-flex p-2 justify-content-end">
             <a href="{% url 'review-create' ticket.id %}" class="btn btn-primary">Créer une critique</a>
@@ -15,4 +18,5 @@
             <a href="{% url 'ticket-delete' ticket.id %}" class="btn btn-danger m-2">Supprimer</a>
         </div>
     {% endif %}
+    </div>
 </div>

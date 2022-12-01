@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Créer une critique</h2>
+<h2 class="text-center m-4">Créer une critique</h2>
 <form method="post" enctype="multipart/form-data">
     <h3>Livre / Article</h3>
     {% include 'review/partials/ticket_form_snippet.html' with form=ticket_form %}
