@@ -162,13 +162,20 @@ def review_create(request, ticket_id):
 def review_update(request, review_id):
     review = get_object_or_404(models.Review, id=review_id)
     form = forms.ReviewForm(instance=review)
+    hide_review_button = True
+
     if request.method == 'POST':
         form = forms.ReviewForm(request.POST, instance=review)
         if form.is_valid():
             form.save()
             return redirect('user-posts')
+    context = {
+        'form': form,
+        'review': review,
+        'hide_review_button': hide_review_button,
+    }
     return render(request, 'review/review_update.html',
-                  context={'form': form})
+                  context=context)
 
 
 @login_required

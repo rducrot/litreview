@@ -9,8 +9,10 @@
     </form>
     <h2>Abonnements</h2>
     {% for user_follows in followed_users %}
-        <p>{{ user_follows.followed_user.username }}</p>
-        <a href="{% url 'unfollow' user_follows.id %}" class="btn btn-danger">Supprimer</a>
+        <div class="d-flex p-2 justify-content-between">
+            <span>{{ user_follows.followed_user.username }}</span>
+            <a href="{% url 'unfollow' user_follows.id %}" class="btn btn-danger">Supprimer</a>
+        </div>
     {% endfor %}
     <h2>Abonnés</h2>
     {% for user_follows in following_users %}
