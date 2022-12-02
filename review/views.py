@@ -25,6 +25,7 @@ def home(request):
     context = {
         'tickets_and_reviews': tickets_and_reviews,
         'home_page': home_page,
+        'navbar': 'home',
     }
     return render(request, 'review/home.html',
                   context)
@@ -43,6 +44,7 @@ def user_posts(request):
     context = {
         'tickets_and_reviews': tickets_and_reviews,
         'post_page': post_page,
+        'navbar': 'posts',
     }
     return render(request, 'review/user_posts.html',
                   context)
@@ -64,6 +66,7 @@ def following(request):
         'form': form,
         'followed_users': followed_users,
         'following_users': following_users,
+        'navbar': 'following',
     }
     return render(request, 'review/following.html',
                   context=context)
@@ -86,8 +89,12 @@ def ticket_create(request):
             ticket.user = request.user
             ticket.save()
             return redirect('home')
+    context = {
+        'form': form,
+        'navbar': 'home',
+    }
     return render(request, 'review/ticket_create.html',
-                  context={'form': form})
+                  context=context)
 
 
 @login_required
@@ -99,8 +106,12 @@ def ticket_update(request, ticket_id):
         if form.is_valid():
             form.save()
             return redirect('user-posts')
+    context = {
+        'form': form,
+        'navbar': 'posts',
+    }
     return render(request, 'review/ticket_update.html',
-                  context={'form': form})
+                  context=context)
 
 
 @login_required
@@ -132,6 +143,7 @@ def ticket_and_review_create(request):
     context = {
         'ticket_form': ticket_form,
         'review_form': review_form,
+        'navbar': 'home',
     }
     return render(request, 'review/ticket_and_review_create.html',
                   context=context)
@@ -153,6 +165,7 @@ def review_create(request, ticket_id):
     context = {
         'ticket': ticket,
         'form': form,
+        'navbar': 'home',
     }
     return render(request, 'review/review_create.html',
                   context=context)
@@ -171,6 +184,7 @@ def review_update(request, review_id):
     context = {
         'form': form,
         'review': review,
+        'navbar': 'posts',
     }
     return render(request, 'review/review_update.html',
                   context=context)
