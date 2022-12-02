@@ -14,7 +14,8 @@
     {% else %}
         <img src="{% static 'images/default_cover.jpg' %}">
     {% endif %}
-    {% if show_review_button %}
+    {% get_reviewed_by_user ticket as ticket_reviewed %}
+    {% if home_page and not ticket_reviewed %}
         <div class="d-flex p-2 justify-content-end">
             <a href="{% url 'review-create' ticket.id %}" class="btn btn-primary">Créer une critique</a>
         </div>

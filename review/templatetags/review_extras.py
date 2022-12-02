@@ -1,5 +1,6 @@
 from django import template
 
+
 register = template.Library()
 
 
@@ -42,3 +43,8 @@ def get_review_poster_display(context, user):
     if user == context['user']:
         return 'Vous avez publié une critique.'
     return f'{user.username} a publié une critique.'
+
+
+@register.simple_tag(takes_context=True)
+def get_reviewed_by_user(context, ticket):
+    return ticket.review_set.filter(user=context['user']).exists()

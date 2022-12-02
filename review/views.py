@@ -21,10 +21,10 @@ def home(request):
         key=lambda instance: instance.time_created,
         reverse=True
     )
-    show_review_button = True
+    home_page = True
     context = {
         'tickets_and_reviews': tickets_and_reviews,
-        'show_review_button': show_review_button,
+        'home_page': home_page,
     }
     return render(request, 'review/home.html',
                   context)
