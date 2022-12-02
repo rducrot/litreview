@@ -95,7 +95,7 @@ def ticket_update(request, ticket_id):
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
     form = forms.TicketForm(instance=ticket)
     if request.method == 'POST':
-        form = forms.TicketForm(request.POST, instance=ticket)
+        form = forms.TicketForm(request.POST, request.FILES, instance=ticket)
         if form.is_valid():
             form.save()
             return redirect('user-posts')
