@@ -2,14 +2,14 @@
 
 <div class="card m-2">
     <div class="card-header bg-primary text-white d-flex justify-content-between">
-        <span class="card-title">{{ review.user }} a publié une critique.</span>
-        <small>{{ review.time_created }}</small>
+        <span class="card-title">{% get_review_poster_display review.user %}</span>
+        <small>{{ review.time_created|format_date }}</small>
     </div>
     <div class="card-body">
     <h3>{{ review.headline }} - {{ review.rating|show_rating }}</h3>
     <p>{{ review.body }}</p>
     <div class="card">
-        <p class="card-header">Ticket - {{ review.ticket.user }}</p>
+        <p class="card-header">Ticket - {% get_poster_display review.ticket.user %}</p>
         <div class="card-body">
         <p>{{ review.ticket.title }}</p>
         <img src="{{ review.ticket.image.url }}" style="max-width: 200px;">

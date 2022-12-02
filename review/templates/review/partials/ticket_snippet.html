@@ -1,7 +1,9 @@
+{% load review_extras %}
+
 <div class="card m-2">
     <div class="card-header bg-primary text-white d-flex justify-content-between">
-        <span class="card-title">{{ ticket.user }} a demandé une critique.</span>
-        <small>{{ ticket.time_created }}</small>
+        <span class="card-title">{% get_ticket_poster_display ticket.user %}</span>
+        <small>{{ ticket.time_created|format_date }}</small>
     </div>
     <div class="card-body">
     <h3>{{ ticket.title }}</h3>

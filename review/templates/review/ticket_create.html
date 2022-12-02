@@ -4,6 +4,8 @@
 <form method="post" enctype="multipart/form-data">
     {% include 'review/partials/ticket_form_snippet.html' %}
     {% csrf_token %}
-    <button type="submit" class="btn btn-primary m-2">Envoyer</button>
+    <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary m-2">Envoyer</button>
+    </div>
 </form>
 {% endblock %}
