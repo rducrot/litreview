@@ -7,7 +7,7 @@
     <h3>{{ ticket.title }}</h3>
     <p>{{ ticket.description }}</p>
     <img src="{{ ticket.image.url }}" style="max-width: 200px;">
-    {% if not hide_review_button %}
+    {% if show_review_button %}
         <div class="d-flex p-2 justify-content-end">
             <a href="{% url 'review-create' ticket.id %}" class="btn btn-primary">Créer une critique</a>
         </div>

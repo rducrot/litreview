@@ -1,0 +1,10 @@
+{% load widget_tweaks %}
+
+{% for field in form.visible_fields %}
+  <div class="form-group m-2">
+    {% render_field field class="form-control mt-4 mb-4" placeholder=field.label %}
+    {% for error in field.errors %}
+      <span class="help-block">{{ error }}</span>
+    {% endfor %}
+  </div>
+{% endfor %}

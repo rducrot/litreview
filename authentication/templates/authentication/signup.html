@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Inscrivez-vous</h2>
-    <form method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <button type="submit" class="btn btn-primary">S'inscrire</button>
-    </form>
-    <a href="{% url 'login' %}" class="btn btn-secondary">Retour</a>
+    <h2 class="text-center m-4">Inscrivez-vous</h2>
+    <div class="container w-75">
+        <form method="post">
+            {% include 'authentication/partials/form_snippet.html' %}
+            {% csrf_token %}
+            <div class="d-flex justify-content-end">
+                <a href="{% url 'login' %}" class="btn btn-secondary m-2">Retour</a>
+                <button type="submit" class="btn btn-primary m-2">S'inscrire</button>
+            </div>
+        </form>
+    </div>
 {% endblock %}

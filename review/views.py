@@ -21,8 +21,10 @@ def home(request):
         key=lambda instance: instance.time_created,
         reverse=True
     )
+    show_review_button = True
     context = {
         'tickets_and_reviews': tickets_and_reviews,
+        'show_review_button': show_review_button,
     }
     return render(request, 'review/home.html',
                   context)
@@ -139,7 +141,6 @@ def ticket_and_review_create(request):
 def review_create(request, ticket_id):
     ticket = models.Ticket.objects.get(id=ticket_id)
     form = forms.ReviewForm()
-    hide_review_button = True
 
     if request.method == 'POST':
         form = forms.ReviewForm(request.POST)
@@ -152,7 +153,6 @@ def review_create(request, ticket_id):
     context = {
         'ticket': ticket,
         'form': form,
-        'hide_review_button': hide_review_button,
     }
     return render(request, 'review/review_create.html',
                   context=context)
@@ -162,7 +162,6 @@ def review_create(request, ticket_id):
 def review_update(request, review_id):
     review = get_object_or_404(models.Review, id=review_id)
     form = forms.ReviewForm(instance=review)
-    hide_review_button = True
 
     if request.method == 'POST':
         form = forms.ReviewForm(request.POST, instance=review)
@@ -172,7 +171,6 @@ def review_update(request, review_id):
     context = {
         'form': form,
         'review': review,
-        'hide_review_button': hide_review_button,
     }
     return render(request, 'review/review_update.html',
                   context=context)

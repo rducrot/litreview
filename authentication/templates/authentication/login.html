@@ -1,17 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div style="display:flex">
-    <div style="margin: 1em">
-        <h2>Inscrivez-vous maintenant</h2>
-        <a href="{% url 'signup' %}" class="btn btn-secondary">S'inscrire</a>
+<div class="row d-flex">
+    <div class="col align-self-center">
+        <h2 class="text-center m-4">Inscrivez-vous maintenant</h2>
+        <div class="d-flex justify-content-center">
+            <a href="{% url 'signup' %}" class="btn btn-outline-primary">S'inscrire</a>
+        </div>
     </div>
-    <div>
-        <h2 style="margin: 1em">Connectez-vous</h2>
+    <div class="col align-self-center">
+        <h2 class="text-center m-4">Connectez-vous</h2>
         <form method="post">
-            {{ form.as_p }}
+            {% include 'authentication/partials/form_snippet.html' %}
             {% csrf_token %}
-            <button type="submit" class="btn btn-primary">Se connecter</button>
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">Se connecter</button>
+            </div>
         </form>
     </div>
 </div>
