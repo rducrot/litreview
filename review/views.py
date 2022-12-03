@@ -6,7 +6,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from . import forms, models
 
-
 @login_required
 def home(request):
     user_follows = models.UserFollows.objects.filter(user=request.user).values('followed_user')
@@ -52,11 +51,11 @@ def user_posts(request):
 
 @login_required
 def following(request):
-    form = forms.UserFollowsForm()
+    form = forms.UserFollowsForm(user=request.user)
     followed_users = models.UserFollows.objects.filter(user=request.user)
     following_users = models.UserFollows.objects.filter(followed_user=request.user)
     if request.method == 'POST':
-        form = forms.UserFollowsForm(request.POST)
+        form = forms.UserFollowsForm(request.user, request.POST)
         if form.is_valid():
             user_follows = form.save(commit=False)
             user_follows.user = request.user

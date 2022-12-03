@@ -3,12 +3,16 @@
 
 {% block content %}
     <h2 class="text-center m-4">Vos posts</h2>
-    {% for instance in tickets_and_reviews %}
-        {% if instance|model_type == 'Ticket' %}
-            {% include 'review/partials/ticket_snippet.html' with ticket=instance %}
-        {% endif %}
-        {% if instance|model_type == 'Review' %}
-            {% include 'review/partials/review_snippet.html' with review=instance %}
-        {% endif %}
-    {% endfor %}
+    {% if tickets_and_reviews %}
+        {% for instance in tickets_and_reviews %}
+            {% if instance|model_type == 'Ticket' %}
+                {% include 'review/partials/ticket_snippet.html' with ticket=instance %}
+            {% endif %}
+            {% if instance|model_type == 'Review' %}
+                {% include 'review/partials/review_snippet.html' with review=instance %}
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <p class="text-center">Vous n'avez pas encore créé de contenu.</p>
+    {% endif %}
 {% endblock %}

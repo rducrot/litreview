@@ -6,12 +6,17 @@
         <a href="{% url 'ticket-create' %}" class="btn btn-primary">Demander une critique</a>
         <a href="{% url 'ticket-and-review-create' %}" class="btn btn-primary">Créer une critique</a>
     </div>
-    {% for instance in tickets_and_reviews %}
-        {% if instance|model_type == 'Ticket' %}
-            {% include 'review/partials/ticket_snippet.html' with ticket=instance %}
-        {% endif %}
-        {% if instance|model_type == 'Review' %}
-            {% include 'review/partials/review_snippet.html' with review=instance %}
-        {% endif %}
-    {% endfor %}
+    {% if tickets_and_reviews %}
+        {% for instance in tickets_and_reviews %}
+            {% if instance|model_type == 'Ticket' %}
+                {% include 'review/partials/ticket_snippet.html' with ticket=instance %}
+            {% endif %}
+            {% if instance|model_type == 'Review' %}
+                {% include 'review/partials/review_snippet.html' with review=instance %}
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <p class="text-center">Aucun contenu à afficher.</p>
+        <p class="text-center">Commencez par <a href="{% url 'ticket-create' %}">demander une critique</a>, ou <a href="{% url 'following' %}">suivez d'autres utilisateurs</a> !</p>
+    {% endif %}
 {% endblock %}
