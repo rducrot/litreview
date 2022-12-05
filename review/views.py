@@ -6,8 +6,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from . import forms, models
 
+
 @login_required
 def home(request):
+    """
+    Main page. Show a flux of tickets and reviews depending on the user's follows.
+    """
     user_follows = models.UserFollows.objects.filter(user=request.user).values('followed_user')
     tickets = models.Ticket.objects.filter(
         Q(user__in=user_follows) | Q(user=request.user)
@@ -32,6 +36,10 @@ def home(request):
 
 @login_required
 def user_posts(request):
+    """
+    Show the tickets and reviews created by the user.
+    They can be modified or deleted here.
+    """
     tickets = models.Ticket.objects.filter(user=request.user)
     reviews = models.Review.objects.filter(user=request.user)
     tickets_and_reviews = sorted(
@@ -51,6 +59,9 @@ def user_posts(request):
 
 @login_required
 def following(request):
+    """
+    Page to manage the users to follow.
+    """
     form = forms.UserFollowsForm(user=request.user)
     followed_users = models.UserFollows.objects.filter(user=request.user)
     following_users = models.UserFollows.objects.filter(followed_user=request.user)
@@ -73,6 +84,9 @@ def following(request):
 
 @login_required
 def unfollow(request, following_id):
+    """
+    Allow to unfollow a user.
+    """
     user_follows = get_object_or_404(models.UserFollows, id=following_id)
     user_follows.delete()
     return redirect('following')
@@ -80,6 +94,9 @@ def unfollow(request, following_id):
 
 @login_required
 def ticket_create(request):
+    """
+    Page with a form to create a ticket.
+    """
     form = forms.TicketForm()
     if request.method == 'POST':
         form = forms.TicketForm(request.POST, request.FILES)
@@ -98,6 +115,9 @@ def ticket_create(request):
 
 @login_required
 def ticket_update(request, ticket_id):
+    """
+    Page with a form to modify an existing ticket.
+    """
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
     form = forms.TicketForm(instance=ticket)
     if request.method == 'POST':
@@ -115,6 +135,9 @@ def ticket_update(request, ticket_id):
 
 @login_required
 def ticket_delete(request, ticket_id):
+    """
+    Page to delete a ticket.
+    """
     ticket = get_object_or_404(models.Ticket, id=ticket_id)
     # TODO: Confirmation message
     ticket.delete()
@@ -123,6 +146,9 @@ def ticket_delete(request, ticket_id):
 
 @login_required
 def ticket_and_review_create(request):
+    """
+    Page with a form to create both a ticket and its corresponding review.
+    """
     ticket_form = forms.TicketForm()
     review_form = forms.ReviewForm()
 
@@ -150,6 +176,9 @@ def ticket_and_review_create(request):
 
 @login_required
 def review_create(request, ticket_id):
+    """
+    Page with a form to create a review.
+    """
     ticket = models.Ticket.objects.get(id=ticket_id)
     form = forms.ReviewForm()
 
@@ -172,6 +201,9 @@ def review_create(request, ticket_id):
 
 @login_required
 def review_update(request, review_id):
+    """
+    Page with a form to modify an existing review.
+    """
     review = get_object_or_404(models.Review, id=review_id)
     form = forms.ReviewForm(instance=review)
 
@@ -191,6 +223,9 @@ def review_update(request, review_id):
 
 @login_required
 def review_delete(request, review_id):
+    """
+    Page to delete a review.
+    """
     review = get_object_or_404(models.Review, id=review_id)
     # TODO: Confirmation message
     review.delete()
