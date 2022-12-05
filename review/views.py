@@ -13,7 +13,7 @@ def home(request):
         Q(user__in=user_follows) | Q(user=request.user)
     )
     reviews = models.Review.objects.filter(
-        Q(user__in=user_follows) | Q(user=request.user)
+        Q(user__in=user_follows) | Q(user=request.user) | Q(ticket__user=request.user)
     )
     tickets_and_reviews = sorted(
         chain(tickets, reviews),
