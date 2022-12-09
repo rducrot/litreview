@@ -41,3 +41,8 @@ Lancer la commande depuis le répertoire de l'application :
 python3 manage.py runserver
 ```
 Le site est accessible par défaut à l'adresse http://127.0.0.1:8000.
+## Qualité du code
+Un rapport flake8 est présent au format HTML dans le dossier `flake8_rapport` afin de vérifier que le code respecte bien la PEP8. Il est possible de générer un nouveau rapport avec la commande :
+```bash
+flake8 --format=html --htmldir=flake8_rapport
+```

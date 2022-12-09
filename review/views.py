@@ -164,7 +164,7 @@ def ticket_and_review_create(request):
             review.ticket = ticket
             review.save()
             return redirect('home')
-        
+
     context = {
         'ticket_form': ticket_form,
         'review_form': review_form,
